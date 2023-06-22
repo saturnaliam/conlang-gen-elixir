@@ -10,11 +10,34 @@ defmodule CG do
       end
     end
 
+    # different categories
+    writing_systems = ["Abugida", "Abjad", "Alphabet", "Logosyllabary", "Syllabary"]
+
+    families = [
+      "Niger-Congo",
+      "Austronesian",
+      "Trans New-Guinea",
+      "Sino-Tibetan",
+      "Indo-European",
+      "Australian",
+      "Afro-Asiatic",
+      "Nilo-Saharan",
+      "Oto-Manguean",
+      "Kra-Dai",
+      "Dravidian",
+      "Tupian"
+    ]
+
+    # generating writing
     writing =
       IO.gets("Should I generate a writing system? [Y/N] ")
-      |> gen_system.(["Abugida", "Abjad", "Alphabet", "Logosyllabary", "Syllabary"])
+      |> gen_system.(writing_systems)
 
-    IO.puts(writing)
+    # generating family
+    family =
+      IO.gets("Should I generate a language family for you? [Y/N] ") |> gen_system.(families)
+
+    IO.puts(writing <> " " <> family)
   end
 
   def prompt_input do
