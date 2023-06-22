@@ -3,10 +3,15 @@ defmodule CG do
     gen_system = fn input, options ->
       input = String.downcase(input) |> String.trim("\n")
 
-      if input == "y" do
-        Enum.random(options)
-      else
-        :empty
+      case input do
+        "y" ->
+          Enum.random(options)
+
+        "q" ->
+          exit(:exit)
+
+        _ ->
+          nil
       end
     end
 
@@ -16,7 +21,7 @@ defmodule CG do
 
     # different categories
     writing_systems = open_file.("writing")
-
+    inflections = open_file.("inflections")
     families = open_file.("families")
 
     # generating writing
@@ -29,10 +34,22 @@ defmodule CG do
       IO.gets("Should I generate a language family for you? [Y/N] ") |> gen_system.(families)
 
     # generating morphology
+    inflection =
+      IO.gets("Should I generate an inflection for you? [Y/N] ") |> gen_system.(inflections)
 
-    # IO.puts("Create a language that:")
-    # IO.puts(if family != :empty, do: "Is part of the #{family} language family.")
-    families
+    # printing out the shi
+    if !writing && !family && !inflection do
+      IO.puts("Please select an option, or enter \"q\" to exit.")
+      generate_conlang()
+    else
+      IO.puts("Create a language that:")
+
+      if writing, do: IO.puts("Has a(n) #{writing} writing system.")
+      if family, do: IO.puts("Is a part of the #{family} family.")
+      if inflection, do: IO.puts("Has #{inflection} inflection.")
+    end
+
+    :ok
   end
 
   def prompt_input do
