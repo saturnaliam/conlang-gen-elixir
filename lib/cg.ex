@@ -1,6 +1,8 @@
 defmodule CG do
   def generate_conlang do
     gen_system = fn input, options ->
+      input = String.downcase(input) |> String.trim("\n")
+
       if input == "y" do
         Enum.random(options)
       else
@@ -10,8 +12,6 @@ defmodule CG do
 
     writing =
       IO.gets("Should I generate a writing system? [Y/N] ")
-      |> String.downcase()
-      |> String.trim("\n")
       |> gen_system.(["Abugida", "Abjad", "Alphabet", "Logosyllabary", "Syllabary"])
 
     IO.puts(writing)
