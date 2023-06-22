@@ -10,23 +10,14 @@ defmodule CG do
       end
     end
 
-    # different categories
-    writing_systems = ["Abugida", "Abjad", "Alphabet", "Logosyllabary", "Syllabary"]
+    open_file = fn file ->
+      File.read!(file) |> String.trim("\n") |> String.trim("\r") |> String.split("/")
+    end
 
-    families = [
-      "Niger-Congo",
-      "Austronesian",
-      "Trans New-Guinea",
-      "Sino-Tibetan",
-      "Indo-European",
-      "Australian",
-      "Afro-Asiatic",
-      "Nilo-Saharan",
-      "Oto-Manguean",
-      "Kra-Dai",
-      "Dravidian",
-      "Tupian"
-    ]
+    # different categories
+    writing_systems = open_file.("writing")
+
+    families = open_file.("families")
 
     # generating writing
     writing =
@@ -37,7 +28,11 @@ defmodule CG do
     family =
       IO.gets("Should I generate a language family for you? [Y/N] ") |> gen_system.(families)
 
-    IO.puts(writing <> " " <> family)
+    # generating morphology
+
+    # IO.puts("Create a language that:")
+    # IO.puts(if family != :empty, do: "Is part of the #{family} language family.")
+    families
   end
 
   def prompt_input do
