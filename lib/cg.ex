@@ -52,7 +52,7 @@ defmodule CG do
     :ok
   end
 
-  def prompt_input do
+  def repl do
     user_input = IO.gets("> ") |> String.trim("\n")
 
     case user_input do
@@ -64,9 +64,9 @@ defmodule CG do
 
       _ ->
         IO.puts("Unknown command #{user_input}")
-        prompt_input()
     end
 
-    prompt_input()
+    IO.puts("")
+    repl()
   end
 end
