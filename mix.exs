@@ -6,8 +6,10 @@ defmodule CG.MixProject do
       app: :conlanggen,
       version: "0.1.0",
       elixir: "~> 1.14",
-      start_permanent: Mix.env() == :prod,
-      deps: deps()
+      start_permanent: Mix.env() == :dev,
+      deps: deps(),
+      path: "build/",
+      escript: [main_module: CG]
     ]
   end
 

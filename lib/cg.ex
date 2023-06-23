@@ -16,7 +16,7 @@ defmodule CG do
     end
 
     open_file = fn file ->
-      File.read!(file) |> String.trim("\n") |> String.trim("\r") |> String.split("/")
+      File.read!("data/" <> file) |> String.trim("\n") |> String.trim("\r") |> String.split("/")
     end
 
     # different categories
@@ -67,6 +67,10 @@ defmodule CG do
     end
 
     IO.puts("")
+    repl()
+  end
+
+  def main(_args \\ []) do
     repl()
   end
 end
